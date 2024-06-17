@@ -1,7 +1,6 @@
 package com.exercises.activeedgetask.exercise3.exception;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -14,36 +13,33 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
-
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<APIErrorResponse> handleResourceNotFoundException(Exception e) {
-        return buildErrorResponse(new APIErrorResponse(HttpStatus.NOT_FOUND,
+    public ResponseEntity<ExceptionHandlerResponse> handleResourceNotFoundException(ResourceNotFoundException e) {
+        return buildErrorResponse(new ExceptionHandlerResponse(HttpStatus.NOT_FOUND,
                 e.getMessage(), HttpStatus.NOT_FOUND.value()));
     }
 
     @ExceptionHandler(InvalidArgumentException.class)
-    public ResponseEntity<APIErrorResponse> handleInvalidArgumentException(Exception e){
-        return buildErrorResponse(new APIErrorResponse(HttpStatus.BAD_REQUEST,
+    public ResponseEntity<ExceptionHandlerResponse> handleInvalidArgumentException(InvalidArgumentException e){
+        return buildErrorResponse(new ExceptionHandlerResponse(HttpStatus.BAD_REQUEST,
                 e.getMessage(), HttpStatus.BAD_REQUEST.value()));
     }
 
     @ExceptionHandler(ResourceAlreadyExistsException.class)
-    public ResponseEntity<APIErrorResponse> handleResourceAlreadyExistsException(Exception e){
-        return buildErrorResponse(new APIErrorResponse(HttpStatus.ALREADY_REPORTED,
+    public ResponseEntity<ExceptionHandlerResponse> handleResourceAlreadyExistsException(ResourceAlreadyExistsException e){
+        return buildErrorResponse(new ExceptionHandlerResponse(HttpStatus.ALREADY_REPORTED,
                 e.getMessage(), HttpStatus.ALREADY_REPORTED.value()));
     }
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<APIErrorResponse> handleValidationException(Exception e){
-        return buildErrorResponse(new APIErrorResponse(HttpStatus.BAD_REQUEST,
+    public ResponseEntity<ExceptionHandlerResponse> handleValidationException(ValidationException e){
+        return buildErrorResponse(new ExceptionHandlerResponse(HttpStatus.BAD_REQUEST,
                 e.getMessage(), HttpStatus.BAD_REQUEST.value()));
     }
 
 
-    private ResponseEntity<APIErrorResponse> buildErrorResponse(APIErrorResponse apiErrorResponse) {
-        return new ResponseEntity<>(apiErrorResponse, apiErrorResponse.getStatus());
+    private ResponseEntity<ExceptionHandlerResponse> buildErrorResponse(ExceptionHandlerResponse exceptionHandlerResponse) {
+        return new ResponseEntity<>(exceptionHandlerResponse, exceptionHandlerResponse.getStatus());
 
     }
 }

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
-public class APIErrorResponse implements Serializable {
+public class ExceptionHandlerResponse implements Serializable {
 
     private HttpStatus status;
     private Integer error;
@@ -20,11 +20,11 @@ public class APIErrorResponse implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timestamp;
-    private APIErrorResponse() {
+    private ExceptionHandlerResponse() {
         this.timestamp = LocalDateTime.now();
     }
 
-    APIErrorResponse(HttpStatus status, String message, Integer error) {
+    ExceptionHandlerResponse(HttpStatus status, String message, Integer error) {
         this();
         this.status = status;
         this.message = message;

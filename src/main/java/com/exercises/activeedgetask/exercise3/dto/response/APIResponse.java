@@ -1,4 +1,4 @@
-package com.exercises.activeedgetask.exercise3.response;
+package com.exercises.activeedgetask.exercise3.dto.response;
 
 import com.exercises.activeedgetask.exercise3.utils.DateUtils;
 import lombok.*;

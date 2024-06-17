@@ -1,4 +1,4 @@
-package com.exercises.activeedgetask.exercise3.request;
+package com.exercises.activeedgetask.exercise3.dto.request;
 
 
 
@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateSockRequest {
+public class CreateStockRequest {
 
     private String name;
 
