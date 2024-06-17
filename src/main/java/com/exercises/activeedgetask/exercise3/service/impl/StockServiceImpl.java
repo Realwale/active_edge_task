@@ -35,7 +35,12 @@ public class StockServiceImpl implements StockService {
                 .build();
         stockRepository.save(stock);
         log.info("Stock created successfully with ID: {}", stock.getId());
-        return new APIResponse<>(false, HttpStatus.CREATED.value(), "Stock created successfully with ID " + stock.getId(), null);
+        return APIResponse.<String>builder()
+                .hasError(false)
+                .statusCode(HttpStatus.CREATED.value())
+                .message("Stock created successfully with ID: " + stock.getId())
+                .data(null)
+                .build();
     }
 
     @Override
@@ -48,7 +53,12 @@ public class StockServiceImpl implements StockService {
         checkStock.setCurrentPrice(stockRequest.getCurrentPrice());
         stockRepository.save(checkStock);
         log.info("Stock updated successfully with ID: {}", stockId);
-        return new APIResponse<>(false, HttpStatus.OK.value(), "Stock updated successfully with ID " + stockId, null);
+        return APIResponse.<String>builder()
+                .hasError(false)
+                .statusCode(HttpStatus.OK.value())
+                .message("Stock with ID "+ stockId +" updated successfully")
+                .data(null)
+                .build();
     }
 
     @Override

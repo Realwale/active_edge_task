@@ -19,12 +19,6 @@ public class GlobalExceptionHandler {
                 e.getMessage(), HttpStatus.NOT_FOUND.value()));
     }
 
-    @ExceptionHandler(InvalidArgumentException.class)
-    public ResponseEntity<ExceptionHandlerResponse> handleInvalidArgumentException(InvalidArgumentException e){
-        return buildErrorResponse(new ExceptionHandlerResponse(HttpStatus.BAD_REQUEST,
-                e.getMessage(), HttpStatus.BAD_REQUEST.value()));
-    }
-
     @ExceptionHandler(ResourceAlreadyExistsException.class)
     public ResponseEntity<ExceptionHandlerResponse> handleResourceAlreadyExistsException(ResourceAlreadyExistsException e){
         return buildErrorResponse(new ExceptionHandlerResponse(HttpStatus.ALREADY_REPORTED,
@@ -36,7 +30,6 @@ public class GlobalExceptionHandler {
         return buildErrorResponse(new ExceptionHandlerResponse(HttpStatus.BAD_REQUEST,
                 e.getMessage(), HttpStatus.BAD_REQUEST.value()));
     }
-
 
     private ResponseEntity<ExceptionHandlerResponse> buildErrorResponse(ExceptionHandlerResponse exceptionHandlerResponse) {
         return new ResponseEntity<>(exceptionHandlerResponse, exceptionHandlerResponse.getStatus());
