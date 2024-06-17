@@ -27,31 +27,28 @@ public class StockServiceImpl implements StockService {
     private final StockRepository stockRepository;
 
     @Override
-    public APIResponse<?> addStock(CreateStockRequest stockRequest) {
-
+    public APIResponse<String> addStock(CreateStockRequest stockRequest) {
         log.info("Adding new stock with name: {}", stockRequest.getName());
         Stock stock = Stock.builder()
                 .name(stockRequest.getName())
                 .currentPrice(stockRequest.getCurrentPrice())
                 .build();
         stockRepository.save(stock);
-
         log.info("Stock created successfully with ID: {}", stock.getId());
-        return new  APIResponse <>(false, HttpStatus.CREATED.value(), "Stock created successfully with ID "+ stock.getId(), null);
-
+        return new APIResponse<>(false, HttpStatus.CREATED.value(), "Stock created successfully with ID " + stock.getId(), null);
     }
 
     @Override
-    public APIResponse<?> updateStock(Long stockId, UpdateStockRequest stockRequest) {
+    public APIResponse<String> updateStock(Long stockId, UpdateStockRequest stockRequest) {
         log.info("Updating stock ID: {}", stockId);
-        Stock checkStock = stockRepository.findById(stockId).orElseThrow(()->
+        Stock checkStock = stockRepository.findById(stockId).orElseThrow(() ->
                 new ResourceNotFoundException("Stock not found with ID: " + stockId));
 
         checkStock.setName(stockRequest.getName());
         checkStock.setCurrentPrice(stockRequest.getCurrentPrice());
         stockRepository.save(checkStock);
         log.info("Stock updated successfully with ID: {}", stockId);
-        return new  APIResponse <>(false, HttpStatus.CREATED.value(), "Stock updated successfully with ID "+ stockId, null);
+        return new APIResponse<>(false, HttpStatus.OK.value(), "Stock updated successfully with ID " + stockId, null);
     }
 
     @Override

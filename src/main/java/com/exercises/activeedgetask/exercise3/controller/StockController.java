@@ -23,16 +23,16 @@ public class StockController {
 
 
     @PostMapping
-    public ResponseEntity<APIResponse<?>> addStock(@RequestBody CreateStockRequest stockRequest){
+    public ResponseEntity<APIResponse<String>> addStock(@RequestBody CreateStockRequest stockRequest){
         stockRequest.validateCreateSockRequest();
-        APIResponse<?> response = stockService.addStock(stockRequest);
+        APIResponse<String> response = stockService.addStock(stockRequest);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<APIResponse<?>> updateStock(@PathVariable Long id, @RequestBody UpdateStockRequest stockRequest){
+    public ResponseEntity<APIResponse<String>> updateStock(@PathVariable Long id, @RequestBody UpdateStockRequest stockRequest){
         stockRequest.validateUpdateStockRequest();
-        APIResponse<?> response = stockService.updateStock(id, stockRequest);
+        APIResponse<String> response = stockService.updateStock(id, stockRequest);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

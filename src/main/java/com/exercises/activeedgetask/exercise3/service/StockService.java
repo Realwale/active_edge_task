@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface StockService {
 
-    APIResponse<?> addStock(CreateStockRequest stockRequest);
+    APIResponse<String> addStock(CreateStockRequest stockRequest);
 
-    APIResponse<?> updateStock(Long stockId, UpdateStockRequest stockRequest);
+    APIResponse<String> updateStock(Long stockId, UpdateStockRequest stockRequest);
 
     APIResponse<StockResponse> getSingleStock(Long stockId);
 
