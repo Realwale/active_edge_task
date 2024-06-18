@@ -35,12 +35,7 @@ public class StockServiceImpl implements StockService {
                 .build();
         stockRepository.save(stock);
         log.info("Stock created successfully with ID: {}", stock.getId());
-        return APIResponse.<String>builder()
-                .hasError(false)
-                .statusCode(HttpStatus.CREATED.value())
-                .message("Stock created successfully with ID: " + stock.getId())
-                .data(null)
-                .build();
+        return new APIResponse<>(false, HttpStatus.CREATED.value(), "Stock created successfully with ID: " + stock.getId(), null);
     }
 
     @Override
@@ -53,12 +48,8 @@ public class StockServiceImpl implements StockService {
         checkStock.setCurrentPrice(stockRequest.getCurrentPrice());
         stockRepository.save(checkStock);
         log.info("Stock updated successfully with ID: {}", stockId);
-        return APIResponse.<String>builder()
-                .hasError(false)
-                .statusCode(HttpStatus.OK.value())
-                .message("Stock with ID "+ stockId +" updated successfully")
-                .data(null)
-                .build();
+
+        return new APIResponse<>(false, HttpStatus.OK.value(), "Stock with ID "+ stockId +" updated successfully", null);
     }
 
     @Override
@@ -75,12 +66,7 @@ public class StockServiceImpl implements StockService {
                 .name(findStock.getName())
                 .build();
         log.info("Stock retrieved successfully for ID: {}", stockId);
-        return APIResponse.<StockResponse>builder()
-                .hasError(false)
-                .statusCode(HttpStatus.OK.value())
-                .message("Request processed successfully for stock with ID: "+ stockId)
-                .data(response)
-                .build();
+        return new APIResponse<>(false, HttpStatus.OK.value(), "Request processed successfully for stock with ID: "+ stockId, response);
     }
 
     @Override
@@ -96,11 +82,6 @@ public class StockServiceImpl implements StockService {
                         .build())
                 .toList();
         log.info("Stock list retrieved successfully");
-        return APIResponse.<List<StockResponse>>builder()
-                .hasError(false)
-                .statusCode(HttpStatus.OK.value())
-                .message("Stock list retrieved successfully")
-                .data(stockList)
-                .build();
+        return new APIResponse<>(false, HttpStatus.OK.value(), "Stock list retrieved successfully", stockList);
     }
 }
